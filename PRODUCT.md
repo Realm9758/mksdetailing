@@ -33,10 +33,13 @@ and message it. Success is a WhatsApp message, not a session length.
 
 ## Positioning
 
-A 5.0 rating across 42 Google reviews, with no rating below it pulling the
-average down, alongside reviews that name price as a reason to come. Careful
-work at a price people call unbeatable is the claim, and it is the customers'
-claim, not the business's.
+A 5.0 rating across 42 Google reviews, alongside reviews that name price as a
+reason to come. Careful work at a price people call unbeatable is the claim,
+and it is the customers' claim, not the business's.
+
+Note for future copy: the 5.0 is a displayed, one-decimal figure, so it does
+not prove that no individual review sat below five. The page states the rating
+and the count and stops there.
 
 The photographic evidence supports a narrower one the copy may lean on: the
 enthusiast cars in Peterborough are brought here.

@@ -86,6 +86,16 @@ export default function Page() {
                       <span aria-hidden="true"> · </span>
                       <span className="certificate-source">{hero.quoteSource}</span>
                     </p>
+                  </div>
+
+                  {/* Source order puts the exhibit second, so on a phone the
+                      handle gets into the first screen under the headline. The
+                      wide layout puts it back in its own column. */}
+                  <div className="certificate-exhibit">
+                    <Compare />
+                  </div>
+
+                  <div className="certificate-say">
                     <p className="prose certificate-statement">{hero.statement}</p>
 
                     <div className="certificate-actions">
@@ -104,10 +114,6 @@ export default function Page() {
                         </a>
                       </div>
                     </div>
-                  </div>
-
-                  <div className="certificate-exhibit">
-                    <Compare />
                   </div>
 
                   <dl className="certificate-fields">
@@ -131,6 +137,10 @@ export default function Page() {
               <h2>Two jobs, in their own words</h2>
               <p className="prose section-aside">{record.issuedNote}</p>
             </div>
+            <div className="register-band" aria-hidden="true">
+              <span>Register of published work</span>
+              <span>{record.reference}</span>
+            </div>
 
             <div className="entries">
               {entries.map((entry, i) => (
@@ -147,7 +157,6 @@ export default function Page() {
                       alt={entry.alt}
                       width={876}
                       height={1470}
-                      loading="lazy"
                       decoding="async"
                     />
                     <figcaption className="entry-plate">
@@ -180,6 +189,10 @@ export default function Page() {
               <h2>{reviewsSection.heading}</h2>
               <p className="prose section-aside">{reviewsSection.note}</p>
             </div>
+            <div className="register-band" aria-hidden="true">
+              <span>Endorsements, verbatim</span>
+              <span>{reviews.length} of {business.reviewCount}</span>
+            </div>
 
             <div className="slips">
               {reviews.map((review, i) => (
@@ -210,7 +223,18 @@ export default function Page() {
         <section className="section" id="contact">
           <div className="wrap">
             <Reveal>
-              <article className="sheet">
+              <article className="sheet backpage-sheet">
+                <div className="sheet-rosette-clip" aria-hidden="true">
+                  <img
+                    className="sheet-rosette backpage-rosette"
+                    src="/guilloche-rosette.svg"
+                    alt=""
+                    width={520}
+                    height={520}
+                  />
+                </div>
+                <div className="stamp backpage-stamp">{contact.stationLabel}</div>
+
                 <div className="sheet-inner backpage">
                   <div className="backpage-col">
                     <h2 className="backpage-heading">{services.heading}</h2>
@@ -235,7 +259,6 @@ export default function Page() {
                   </div>
 
                   <div className="backpage-col backpage-station">
-                    <div className="stamp stamp-heading">{contact.stationLabel}</div>
                     <h2 className="backpage-heading">{contact.heading}</h2>
                     <p className="prose">{contact.body}</p>
 

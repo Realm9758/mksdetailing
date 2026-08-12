@@ -240,7 +240,7 @@ dd {
 
 .sheet-rosette {
   position: absolute;
-  opacity: 0.11;
+  opacity: 0.17;
   mix-blend-mode: multiply;
 }
 
@@ -342,22 +342,29 @@ dd {
   margin: 0;
 }
 
-/* An unfilled box on a real form is ruled, not empty. This is the visual the
-   sourcing rule earns: a fact nobody supplied looks like a fact nobody
-   supplied. */
+/* An unfilled box on a real form is a ruled slot, not an empty line. This is
+   the visual the sourcing rule earns: a fact nobody supplied has to look like a
+   fact nobody supplied, and it has to look deliberate. */
 .field-blank {
+  display: block;
+  background: var(--paper-3);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 0.5rem 0.7rem;
   color: var(--ink-2);
-  font-family: var(--font-data), monospace;
-  font-size: 0.9rem;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  text-wrap: pretty;
 }
 
+/* The pencil rule that runs through an unfilled box on a printed form. */
 .field-blank::before {
   content: "";
-  display: inline-block;
-  width: 2.5rem;
-  margin-right: 0.6rem;
-  vertical-align: 0.28em;
-  border-top: 1px solid var(--paper-3);
+  display: block;
+  width: 3.5rem;
+  margin-bottom: 0.35rem;
+  border-top: 1px solid var(--rule);
 }
 
 /* ==========================================================================
@@ -594,6 +601,29 @@ dd {
   height: 30rem;
 }
 
+.backpage-sheet {
+  position: relative;
+}
+
+.backpage-rosette {
+  right: -7rem;
+  bottom: -8rem;
+  width: 28rem;
+  height: 28rem;
+}
+
+/* The issuing stamp is applied to the sheet, across its trim rule, the way a
+   stamp actually lands. It is not a label sitting above a heading. */
+.backpage-stamp {
+  position: absolute;
+  top: -1.15rem;
+  left: clamp(1.25rem, 5vw, 3rem);
+  z-index: 3;
+  --stamp-rotate: -3.2deg;
+  background: var(--paper);
+  box-shadow: 0 0.4rem 0.9rem rgba(6, 20, 14, 0.16);
+}
+
 .certificate-body {
   position: relative;
   display: grid;
@@ -622,7 +652,6 @@ dd {
 }
 
 .certificate-statement {
-  margin-top: 1.15rem;
   font-size: 1.03rem;
 }
 
@@ -691,21 +720,27 @@ dd {
   .certificate-body {
     grid-template-columns: minmax(0, 1.1fr) minmax(20rem, 0.9fr);
     grid-template-areas:
-      "lede exhibit"
-      "fields exhibit";
+      "lede    exhibit"
+      "say     exhibit"
+      "fields  exhibit";
     align-items: start;
     align-content: start;
-    gap: clamp(1.75rem, 3.5vw, 2.75rem) clamp(2rem, 4vw, 3.5rem);
+    gap: clamp(1.5rem, 3vw, 2.25rem) clamp(2rem, 4vw, 3.5rem);
   }
   .certificate-lede {
     grid-area: lede;
   }
+  .certificate-say {
+    grid-area: say;
+  }
   .certificate-exhibit {
     grid-area: exhibit;
   }
+  /* The form ends where the form ends. Letting the column run short beats
+     stretching a gap into the middle of it. */
   .certificate-fields {
     grid-area: fields;
-    align-self: end;
+    align-self: start;
   }
   /* Clear of the exhibit entirely: it hangs off the sheet's own corner. */
   .certificate-disc {
@@ -721,8 +756,16 @@ dd {
 
 @media (max-width: 61.99rem) {
   .certificate-disc {
-    position: relative;
-    margin: 0.25rem 0 -0.25rem;
+    position: absolute;
+    top: -1.6rem;
+    right: -1.4rem;
+    width: clamp(6.25rem, 26vw, 8.5rem);
+    height: auto;
+    z-index: 3;
+  }
+  /* Keep the document reference out from under it. */
+  .dochead {
+    padding-right: clamp(5rem, 22vw, 7rem);
   }
 }
 
@@ -935,10 +978,6 @@ dd {
   border-top: 0;
 }
 
-.backpage-station .stamp-heading {
-  margin-bottom: 1.1rem;
-}
-
 .backpage-action {
   margin-top: 1.6rem;
 }
@@ -1042,4 +1081,38 @@ dd {
   .docfoot-note {
     text-align: center;
   }
+}
+
+/* ==========================================================================
+   Register band — the ruled head a ledger page carries above its entries.
+   It is what holds the two field sections to the document they belong to.
+   ========================================================================== */
+
+.register-band {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 1.5rem;
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+  padding: 0.55rem 0 0.5rem;
+  border-top: 2px solid rgba(232, 239, 226, 0.55);
+  border-bottom: 1px solid rgba(232, 239, 226, 0.3);
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+
+.register-band > :last-child {
+  font-family: var(--font-data), monospace;
+  letter-spacing: 0.08em;
+  text-transform: none;
+}
+
+/* The stamp sits over the sheet's own paper, so its labels stay ink. */
+.on-field .backpage-stamp {
+  color: var(--stamp);
 }

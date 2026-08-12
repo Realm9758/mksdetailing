@@ -98,11 +98,19 @@ export const hero = {
   /** Factual, from the Google category, the business name and the listing. */
   statement:
     "Valeting and detailing on First Drove, Peterborough. Every car quoted on the car.",
+  /**
+   * Four fields, and every one of them is written down somewhere. "Station" is
+   * the business address from the Google listing; the registration is legible
+   * on the car in both frames; "Maintenance clean" is the post's own caption;
+   * the date is stated on the post. There is deliberately no "Result" field,
+   * because no source states an outcome for this particular car and the
+   * exhibit beside it is the outcome anyway.
+   */
   fields: [
     { label: "Station", value: `${business.addressLine}, ${business.city}` },
     { label: "Vehicle", value: "Audi S3 · S30 ERH" },
     { label: "Work", value: "Maintenance clean" },
-    { label: "Result", value: "Handed back" },
+    { label: "Posted", value: "25 July 2026" },
   ],
 } as const;
 
@@ -114,7 +122,12 @@ export const hero = {
  * material does not have.
  */
 export const exhibit = {
-  heading: "Same car, same afternoon",
+  /**
+   * Not "same afternoon": the two frames sit in one carousel, which proves one
+   * post and not one afternoon. The sky differs between them because the foam
+   * blows the exposure out, but that is an explanation, not a source.
+   */
+  heading: "The same Audi S3, before and after",
   beforeLabel: "At arrival",
   afterLabel: "At handover",
   beforeSrc: "/work/s3-before.webp",
@@ -123,7 +136,7 @@ export const exhibit = {
     "An Audi S3 covered head to toe in white snow foam on the forecourt at MKS Detailing, parked cars and houses behind it",
   afterAlt:
     "The same Audi S3 washed and dry, its midnight purple paint and black alloy wheels clean, on the same forecourt",
-  note: "Two frames from one carousel on @mksdetailingg. The camera moved between them, so the car is aligned and the background is not.",
+  note: "Two frames from one carousel on @mksdetailingg. The camera moved between them, so the car is aligned and the background is not. All that foam pulled the first frame's exposure up, and its tone has been pulled back down to match; nothing on the car itself was touched.",
   control: "Drag to compare, or use the arrow keys",
 } as const;
 
@@ -176,7 +189,13 @@ export const reviews = [
 ] as const;
 
 export const reviewsSection = {
-  heading: "Forty-two reviews, not one below five stars",
+  /**
+   * Deliberately NOT "not one below five stars". Google rounds a displayed
+   * rating to one decimal, so a 5.0 across 42 reviews is consistent with a
+   * single four-star among them. The listing proves the number and the count,
+   * so the number and the count are all this says.
+   */
+  heading: "Five point oh, across forty-two reviews",
   note: "Google Business listing, checked 12 August 2026.",
 } as const;
 
