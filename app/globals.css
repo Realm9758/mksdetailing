@@ -358,12 +358,12 @@ dd {
   text-wrap: pretty;
 }
 
-/* The pencil rule that runs through an unfilled box on a printed form. */
+/* The writing line an unfilled box on a printed form carries, running the
+   width of the box the way a real one does. */
 .field-blank::before {
   content: "";
   display: block;
-  width: 3.5rem;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.5rem;
   border-top: 1px solid var(--rule);
 }
 
@@ -616,8 +616,8 @@ dd {
    stamp actually lands. It is not a label sitting above a heading. */
 .backpage-stamp {
   position: absolute;
-  top: -1.15rem;
-  left: clamp(1.25rem, 5vw, 3rem);
+  bottom: -1.1rem;
+  right: clamp(1.5rem, 7vw, 4.5rem);
   z-index: 3;
   --stamp-rotate: -3.2deg;
   background: var(--paper);
@@ -723,8 +723,13 @@ dd {
       "lede    exhibit"
       "say     exhibit"
       "fields  exhibit";
+    /* The exhibit spans all three rows, and a spanning item forces the rows it
+       spans to sum to its height. Left to `auto` they share the surplus out
+       between them, which is how a 100px hole opened between the attribution
+       and the statement. Sizing the last row `1fr` sends every pixel of that
+       surplus to the foot, where a form ending short is the correct look. */
+    grid-template-rows: auto auto 1fr;
     align-items: start;
-    align-content: start;
     gap: clamp(1.5rem, 3vw, 2.25rem) clamp(2rem, 4vw, 3.5rem);
   }
   .certificate-lede {
@@ -755,11 +760,13 @@ dd {
 }
 
 @media (max-width: 61.99rem) {
+  /* Overhang the sheet, but never the viewport: the gutter is only 4vw here,
+     so the disc has to stay inside what is left of it. */
   .certificate-disc {
     position: absolute;
-    top: -1.6rem;
-    right: -1.4rem;
-    width: clamp(6.25rem, 26vw, 8.5rem);
+    top: -1.5rem;
+    right: -0.5rem;
+    width: clamp(6.25rem, 25vw, 8.25rem);
     height: auto;
     z-index: 3;
   }

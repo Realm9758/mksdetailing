@@ -110,6 +110,10 @@ export const hero = {
     { label: "Station", value: `${business.addressLine}, ${business.city}` },
     { label: "Vehicle", value: "Audi S3 · S30 ERH" },
     { label: "Work", value: "Maintenance clean" },
+    // Read off the carousel post that the exhibit above comes from: 15 likes,
+    // 25 July. The forecourt entry below happens to carry the same date, but it
+    // is a different post with a different caption and 17 likes, and this value
+    // is not borrowed from it.
     { label: "Posted", value: "25 July 2026" },
   ],
 } as const;
