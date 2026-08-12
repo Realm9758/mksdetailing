@@ -1,0 +1,1045 @@
+/* ==========================================================================
+   MK'S DETAILING — the document system
+   --------------------------------------------------------------------------
+   The whole site is one vehicle document: security-paper sheets laid on an
+   engine-turned green field, filled in with form fields, and marked with
+   rubber stamps. Every rule below belongs to that one object. If a style here
+   would not appear on a real certificate, it does not belong.
+   ========================================================================== */
+
+:root {
+  /* --- The field ------------------------------------------------------- */
+  --fen: #0a3a2b;          /* security green, the ground the sheets lie on */
+  --fen-deep: #062a1f;     /* the well under a sheet, and the page's edges */
+  --fen-pale: #a9c4b4;     /* secondary text ON the green, tinted from it   */
+
+  /* --- The paper ------------------------------------------------------- */
+  --paper: #e8efe2;        /* security paper: green-cast, never cream       */
+  --paper-2: #dde6d5;      /* alternating form rows, and inset panels       */
+  --paper-3: #cfdbc6;      /* the tone a blank, unfilled field is printed in */
+  --rule: #9fb494;         /* the hairline every form is ruled with         */
+  --rule-hard: #2c3a26;    /* the heavy rule under a document header        */
+
+  /* --- The ink --------------------------------------------------------- */
+  --ink: #10160f;          /* what the form is printed in                   */
+  --ink-2: #46523f;        /* field labels and anything secondary            */
+  --stamp: #57318f;        /* rubber-stamp violet: every action, every mark  */
+  --stamp-deep: #3f2269;
+  --stamp-wash: rgba(87, 49, 143, 0.12);
+  --disc: #b8342a;         /* tax-disc red, spent on the rating and nothing else */
+
+  /* --- Measure --------------------------------------------------------- */
+  --sheet: 74rem;
+  --gutter: clamp(1rem, 4vw, 2.75rem);
+  --step: 0.35rem;
+
+  --shadow-sheet: 0 1.5rem 3.5rem rgba(3, 20, 14, 0.42),
+    0 0.25rem 0.75rem rgba(3, 20, 14, 0.3);
+  --shadow-lift: 0 0.75rem 1.75rem rgba(3, 20, 14, 0.28);
+
+  --ease-stamp: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: dark;
+  accent-color: var(--stamp);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background-color: var(--fen);
+  background-image: url("/guilloche-field.svg");
+  background-size: 240px 240px;
+  color: var(--paper);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(1rem, 0.97rem + 0.15vw, 1.075rem);
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* The engine-turning is a print, not a texture: hold it back so it never
+   competes with the paper it sits behind. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    120% 90% at 50% 0%,
+    rgba(10, 58, 43, 0.55),
+    rgba(6, 42, 31, 0.9)
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1px;
+}
+
+/* --- Browser surfaces, themed from the palette --------------------------- */
+
+::selection {
+  background: var(--stamp);
+  color: var(--paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--stamp);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+.on-paper :focus-visible {
+  outline-color: var(--stamp);
+}
+
+.on-field :focus-visible {
+  outline-color: var(--paper);
+}
+
+@supports (scrollbar-color: red blue) {
+  html {
+    scrollbar-color: #2d5a48 var(--fen-deep);
+    scrollbar-width: thin;
+  }
+}
+
+/* ==========================================================================
+   Type
+   ========================================================================== */
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  line-height: 0.98;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/* Browser default indents every dd by 40px. Every field on this page is a
+   definition list, so this one line is load-bearing. */
+dl,
+dt,
+dd {
+  margin: 0;
+}
+
+/* The voice a form uses for the name of a box. */
+.label {
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  line-height: 1.3;
+}
+
+.on-field .label {
+  color: var(--fen-pale);
+}
+
+/* The voice a form uses for what someone wrote in the box. */
+.value {
+  font-family: var(--font-data), ui-monospace, monospace;
+  font-size: 0.94rem;
+  letter-spacing: 0.005em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.on-field .value {
+  color: var(--paper);
+}
+
+.prose {
+  max-width: 66ch;
+  color: var(--ink-2);
+}
+
+.on-field .prose {
+  color: var(--fen-pale);
+}
+
+/* ==========================================================================
+   The sheet
+   ========================================================================== */
+
+.sheet {
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow-sheet);
+  /* A certificate is trimmed, not rounded. */
+  border-radius: 2px;
+}
+
+/* Security paper is printed to the edge, then trimmed inside a border rule. */
+.sheet::before {
+  content: "";
+  position: absolute;
+  inset: 0.55rem;
+  border: 1px solid var(--rule);
+  pointer-events: none;
+}
+
+.sheet::after {
+  content: "";
+  position: absolute;
+  inset: 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--rule) 45%, transparent);
+  pointer-events: none;
+}
+
+.sheet-inner {
+  position: relative;
+  padding: clamp(1.5rem, 4vw, 3.25rem);
+}
+
+/* The medallion a certificate carries behind its header. It is clipped by its
+   own wrapper rather than by the sheet, so the sheet stays free to let the
+   rating disc overhang its corner. */
+.sheet-rosette-clip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.sheet-rosette {
+  position: absolute;
+  opacity: 0.11;
+  mix-blend-mode: multiply;
+}
+
+/* --- Document header ------------------------------------------------------ */
+
+.dochead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(1rem, 3vw, 2rem);
+  padding-bottom: calc(var(--step) * 3);
+}
+
+.dochead-id {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.dochead-name {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.05rem, 2.6vw, 1.4rem);
+  letter-spacing: 0.045em;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.dochead-descriptor {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-top: 0.3rem;
+}
+
+.dochead-ref {
+  display: grid;
+  gap: 0.2rem;
+}
+
+@media (min-width: 46rem) {
+  .dochead-ref {
+    text-align: right;
+  }
+}
+
+/* The double rule that closes a document header. */
+.rule-double {
+  border: 0;
+  border-top: 2px solid var(--rule-hard);
+  margin: 0;
+  padding: 0;
+  position: relative;
+  height: 4px;
+}
+
+.rule-double::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 3px;
+  border-top: 1px solid var(--rule);
+}
+
+.rule-thin {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 0;
+}
+
+/* --- Field rows ----------------------------------------------------------- */
+
+.fields {
+  display: grid;
+  margin: 0;
+}
+
+.field {
+  display: grid;
+  grid-template-columns: minmax(7.5rem, 10rem) 1fr;
+  align-items: baseline;
+  gap: 0 1rem;
+  padding: 0.62rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.field:first-child {
+  border-top: 1px solid var(--rule);
+}
+
+.field dt {
+  margin: 0;
+}
+
+.field dd {
+  margin: 0;
+}
+
+/* An unfilled box on a real form is ruled, not empty. This is the visual the
+   sourcing rule earns: a fact nobody supplied looks like a fact nobody
+   supplied. */
+.field-blank {
+  color: var(--ink-2);
+  font-family: var(--font-data), monospace;
+  font-size: 0.9rem;
+}
+
+.field-blank::before {
+  content: "";
+  display: inline-block;
+  width: 2.5rem;
+  margin-right: 0.6rem;
+  vertical-align: 0.28em;
+  border-top: 1px solid var(--paper-3);
+}
+
+/* ==========================================================================
+   Stamps
+   ========================================================================== */
+
+.stamp {
+  --stamp-rotate: -2.4deg;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.95rem;
+  border: 2px solid var(--stamp);
+  color: var(--stamp);
+  background: var(--stamp-wash);
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1;
+  border-radius: 2px;
+  transform: rotate(var(--stamp-rotate));
+}
+
+.stamp-heading {
+  --stamp-rotate: -1.6deg;
+  font-size: clamp(0.82rem, 2vw, 1rem);
+  padding: 0.45rem 0.9rem;
+}
+
+/* The primary action is the stamp that ends a document: pressed, not drawn. */
+.action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.95rem 1.5rem;
+  border: 2px solid var(--stamp);
+  border-radius: 2px;
+  background: var(--stamp);
+  color: var(--paper);
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1rem, 2.4vw, 1.15rem);
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+  line-height: 1;
+  text-decoration: none;
+  box-shadow: 0 0.4rem 1rem rgba(63, 34, 105, 0.28);
+  transition: transform 0.18s var(--ease-stamp), box-shadow 0.18s var(--ease-stamp),
+    background-color 0.18s var(--ease-stamp);
+}
+
+.action:hover {
+  background: var(--stamp-deep);
+  transform: translateY(-1px) rotate(-0.8deg);
+  box-shadow: 0 0.7rem 1.5rem rgba(63, 34, 105, 0.34);
+}
+
+.action:active {
+  transform: translateY(1px) rotate(0deg);
+  box-shadow: 0 0.15rem 0.4rem rgba(63, 34, 105, 0.4);
+}
+
+.action svg {
+  flex: none;
+}
+
+.action-quiet {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0;
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  transition: color 0.16s var(--ease-stamp), border-color 0.16s var(--ease-stamp);
+}
+
+.action-quiet:hover {
+  color: var(--stamp);
+  border-bottom-color: var(--stamp);
+}
+
+.on-field .action-quiet {
+  color: var(--paper);
+  border-bottom-color: rgba(169, 196, 180, 0.4);
+}
+
+.on-field .action-quiet:hover {
+  color: #fff;
+  border-bottom-color: var(--paper);
+}
+
+/* ==========================================================================
+   Stamped entrances: the one authored motion on the page.
+   Default state is fully visible; the pre-state is only ever set by script,
+   so nothing depends on JavaScript to be readable.
+   ========================================================================== */
+
+[data-stamp="pre"] {
+  opacity: 0;
+  transform: scale(1.045) rotate(var(--stamp-in-rotate, -1.2deg));
+  filter: blur(1.5px);
+}
+
+[data-stamp="in"] {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  transition: opacity 0.42s var(--ease-stamp),
+    transform 0.62s var(--ease-stamp), filter 0.42s var(--ease-stamp);
+  transition-delay: var(--stamp-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-stamp="pre"] {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+  [data-stamp="in"] {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+
+.wrap {
+  width: min(100% - calc(var(--gutter) * 2), var(--sheet));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: clamp(3rem, 9vw, 6.5rem);
+}
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.section-head h2 {
+  font-size: clamp(1.75rem, 4.6vw, 2.9rem);
+  color: var(--paper);
+}
+
+/* ==========================================================================
+   Running header — the header a multi-page document repeats on every sheet
+   ========================================================================== */
+
+.runhead {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: var(--fen-deep);
+  border-bottom: 1px solid rgba(169, 196, 180, 0.22);
+}
+
+.runhead-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.6rem;
+}
+
+.runhead-id {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  color: var(--paper);
+}
+
+.runhead-name {
+  display: block;
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+}
+
+.runhead-place {
+  display: block;
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fen-pale);
+}
+
+.runhead-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  border: 1.5px solid var(--paper);
+  border-radius: 2px;
+  color: var(--paper);
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color 0.16s var(--ease-stamp), color 0.16s var(--ease-stamp);
+}
+
+.runhead-action:hover {
+  background: var(--paper);
+  color: var(--fen-deep);
+}
+
+/* ==========================================================================
+   The certificate
+   ========================================================================== */
+
+.certificate-section {
+  padding-top: clamp(1.5rem, 4vw, 3rem);
+}
+
+
+.certificate-rosette {
+  top: -7rem;
+  left: -6rem;
+  width: 30rem;
+  height: 30rem;
+}
+
+.certificate-body {
+  position: relative;
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3rem);
+  padding-block: clamp(1.5rem, 3.5vw, 2.5rem);
+}
+
+.certificate-quote {
+  font-size: clamp(2.15rem, 6.4vw, 4.9rem);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  max-width: 15ch;
+}
+
+.certificate-attrib {
+  margin-top: 0.9rem;
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--stamp);
+}
+
+.certificate-source {
+  color: var(--ink-2);
+  font-weight: 500;
+}
+
+.certificate-statement {
+  margin-top: 1.15rem;
+  font-size: 1.03rem;
+}
+
+.certificate-actions {
+  margin-top: clamp(1.5rem, 3vw, 2rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.75rem;
+}
+
+.certificate-alt {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.5rem;
+}
+
+/* The disc is applied to the document, so it overhangs the trimmed corner
+   rather than sitting politely inside it. */
+.certificate-disc {
+  justify-self: start;
+  filter: drop-shadow(0 0.55rem 1.1rem rgba(6, 20, 14, 0.3));
+  rotate: -7deg;
+}
+
+.certificate-fields {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--rule);
+  padding-top: 0.4rem;
+}
+
+.certificate-field {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.85rem 0 0.25rem;
+}
+
+@media (min-width: 46rem) {
+  .certificate-fields {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0 1.5rem;
+  }
+  .certificate-field + .certificate-field {
+    border-left: 1px solid var(--rule);
+    padding-left: 1.5rem;
+  }
+}
+
+@media (min-width: 62rem) {
+  .certificate-fields {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 1.75rem;
+  }
+  .certificate-field:nth-child(odd) {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .certificate-field:nth-child(n + 3) {
+    border-top: 1px solid var(--rule);
+    padding-top: 0.85rem;
+  }
+}
+
+@media (min-width: 62rem) {
+  .certificate-body {
+    grid-template-columns: minmax(0, 1.1fr) minmax(20rem, 0.9fr);
+    grid-template-areas:
+      "lede exhibit"
+      "fields exhibit";
+    align-items: start;
+    align-content: start;
+    gap: clamp(1.75rem, 3.5vw, 2.75rem) clamp(2rem, 4vw, 3.5rem);
+  }
+  .certificate-lede {
+    grid-area: lede;
+  }
+  .certificate-exhibit {
+    grid-area: exhibit;
+  }
+  .certificate-fields {
+    grid-area: fields;
+    align-self: end;
+  }
+  /* Clear of the exhibit entirely: it hangs off the sheet's own corner. */
+  .certificate-disc {
+    position: absolute;
+    top: -3.25rem;
+    right: -3.25rem;
+    z-index: 3;
+  }
+  .dochead {
+    padding-right: 7rem;
+  }
+}
+
+@media (max-width: 61.99rem) {
+  .certificate-disc {
+    position: relative;
+    margin: 0.25rem 0 -0.25rem;
+  }
+}
+
+/* ==========================================================================
+   Entries — the jobs, laid straight on the field
+   ========================================================================== */
+
+.section-aside {
+  font-size: 0.86rem;
+  max-width: 42ch;
+}
+
+@media (min-width: 52rem) {
+  .section-aside {
+    text-align: right;
+  }
+}
+
+.entries {
+  display: grid;
+  gap: clamp(2.5rem, 7vw, 5rem);
+}
+
+.entry-figure {
+  margin: 0;
+  position: relative;
+}
+
+.entry-shot {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: 50% 56%;
+  border: 1px solid rgba(169, 196, 180, 0.35);
+  box-shadow: var(--shadow-sheet);
+}
+
+.entry-plate {
+  background: var(--paper);
+  color: var(--ink);
+  padding: 1rem 1.25rem;
+  box-shadow: var(--shadow-lift);
+  border-radius: 2px;
+}
+
+.entry-fields {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0;
+}
+
+.entry-field {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.entry-field .value {
+  color: var(--ink);
+}
+
+/* A paper plate laid on the green field is still paper. Without this the
+   labels inherit the field's pale ink and land at 1.9:1 on their own surface. */
+.on-field .entry-plate .label {
+  color: var(--ink-2);
+}
+
+@media (min-width: 52rem) {
+  .entry-figure {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    align-items: end;
+  }
+  .entry-shot {
+    grid-column: 1 / 9;
+    grid-row: 1;
+    aspect-ratio: 16 / 11;
+  }
+  .entry-plate {
+    grid-column: 8 / 13;
+    grid-row: 1;
+    z-index: 2;
+    margin-bottom: 2.5rem;
+  }
+  .entries > :nth-child(even) .entry-shot {
+    grid-column: 5 / 13;
+  }
+  .entries > :nth-child(even) .entry-plate {
+    grid-column: 1 / 6;
+  }
+}
+
+/* ==========================================================================
+   Endorsement slips
+   ========================================================================== */
+
+.slips {
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+.slip {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 1.4rem 1.5rem 1.25rem;
+  box-shadow: var(--shadow-lift);
+  border-radius: 2px;
+  position: relative;
+  display: grid;
+  gap: 0.85rem;
+  align-content: start;
+  height: 100%;
+}
+
+/* The perforated stub down the left edge of a receipt book slip. */
+.slip::before {
+  content: "";
+  position: absolute;
+  top: 0.65rem;
+  bottom: 0.65rem;
+  left: 0.85rem;
+  border-left: 1px dashed var(--paper-3);
+}
+
+.slip-stars {
+  display: flex;
+  gap: 0.15rem;
+  color: var(--disc);
+}
+
+.slip-body {
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+
+.slip-by {
+  margin-top: auto;
+  padding-top: 0.35rem;
+  border-top: 1px solid var(--rule);
+}
+
+.slip-by cite {
+  font-style: normal;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--stamp);
+}
+
+@media (min-width: 52rem) {
+  .slips {
+    grid-template-columns: 1.05fr 0.85fr 1.1fr;
+    align-items: start;
+  }
+  .slips > :nth-child(2) {
+    margin-top: 2.25rem;
+  }
+  .slips > :nth-child(3) {
+    margin-top: 0.75rem;
+  }
+}
+
+/* ==========================================================================
+   The back page
+   ========================================================================== */
+
+.backpage {
+  display: grid;
+  gap: clamp(2.25rem, 5vw, 3.5rem);
+}
+
+.backpage-heading {
+  font-size: clamp(1.5rem, 3.4vw, 2.15rem);
+  color: var(--ink);
+  margin-bottom: 1.1rem;
+}
+
+.schedule {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.schedule-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding: 0.68rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.schedule-name {
+  font-size: 0.98rem;
+}
+
+.schedule-source {
+  font-size: 0.63rem;
+  letter-spacing: 0.15em;
+  color: var(--stamp);
+}
+
+.backpage-blanks .field:first-child {
+  border-top: 0;
+}
+
+.backpage-station .stamp-heading {
+  margin-bottom: 1.1rem;
+}
+
+.backpage-action {
+  margin-top: 1.6rem;
+}
+
+.station-list {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 1.25rem 0 0;
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: 0.8rem;
+}
+
+.station-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+
+.station-list svg {
+  flex: none;
+  color: var(--stamp);
+}
+
+.station-list a {
+  color: inherit;
+  text-decoration-color: var(--rule);
+}
+
+.station-list a:hover {
+  color: var(--stamp);
+  text-decoration-color: currentColor;
+}
+
+@media (min-width: 58rem) {
+  .backpage {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+  }
+  .backpage-station {
+    border-left: 1px solid var(--rule);
+    padding-left: clamp(2rem, 4vw, 3.5rem);
+  }
+}
+
+/* ==========================================================================
+   Document footer
+   ========================================================================== */
+
+.docfoot {
+  background: var(--fen-deep);
+  border-top: 1px solid rgba(169, 196, 180, 0.22);
+  padding-block: 2.25rem;
+}
+
+.docfoot-inner {
+  display: grid;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.docfoot-id {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  color: var(--paper);
+}
+
+.docfoot-line {
+  display: block;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fen-pale);
+  margin-top: 0.2rem;
+}
+
+.docfoot-note {
+  font-size: 0.84rem;
+  color: var(--fen-pale);
+  max-width: 52ch;
+}
+
+.docfoot-ref {
+  color: var(--fen-pale);
+  font-size: 0.8rem;
+}
+
+@media (min-width: 58rem) {
+  .docfoot-inner {
+    grid-template-columns: auto 1fr auto;
+    gap: 2.5rem;
+  }
+  .docfoot-note {
+    text-align: center;
+  }
+}

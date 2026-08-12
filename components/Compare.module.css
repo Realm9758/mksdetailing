@@ -1,0 +1,162 @@
+/* The inspection plate. A photograph mounted on the certificate, ruled across
+   by the comparison handle. Corner marks are the register marks a printed plate
+   carries, not decoration for its own sake. */
+
+.plate {
+  margin: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--ink);
+  border: 1px solid var(--rule-hard);
+  box-shadow: var(--shadow-lift);
+  isolation: isolate;
+}
+
+.shot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 58%;
+}
+
+/* Right of the handle is the finished car. */
+.after {
+  clip-path: inset(0 0 0 var(--pos));
+}
+
+.ruler {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1.15rem;
+  background:
+    repeating-linear-gradient(
+      to right,
+      color-mix(in srgb, var(--paper) 88%, transparent) 0 1px,
+      transparent 1px 20px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(6, 20, 14, 0.55),
+      rgba(6, 20, 14, 0)
+    );
+  background-size: 100% 0.46rem, 100% 100%;
+  background-repeat: repeat-x, no-repeat;
+  background-position: top left, top left;
+}
+
+.divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pos);
+  width: 2px;
+  margin-left: -1px;
+  background: var(--stamp);
+  box-shadow: 0 0 0 1px rgba(232, 239, 226, 0.55);
+  pointer-events: none;
+}
+
+.carriage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 2px solid var(--paper);
+  border-radius: 2px;
+  background: var(--stamp);
+  color: var(--paper);
+  box-shadow: 0 0.35rem 1rem rgba(6, 20, 14, 0.45);
+}
+
+.tag {
+  position: absolute;
+  bottom: 0.7rem;
+  padding: 0.28rem 0.55rem;
+  background: rgba(6, 20, 14, 0.72);
+  color: var(--paper);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.tagBefore {
+  left: 0.7rem;
+}
+
+.tagAfter {
+  right: 0.7rem;
+}
+
+/* The real control: invisible, exactly the size of the plate, and the reason
+   this thing works with a keyboard. */
+.range {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+  appearance: none;
+  background: transparent;
+}
+
+.range::-webkit-slider-thumb {
+  appearance: none;
+  width: 2.75rem;
+  height: 100%;
+}
+
+.range::-moz-range-thumb {
+  width: 2.75rem;
+  height: 100%;
+  border: 0;
+}
+
+.frame:focus-within {
+  outline: 2px solid var(--stamp);
+  outline-offset: 3px;
+}
+
+.caption {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.control {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--stamp);
+}
+
+.note {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+  max-width: 46ch;
+}
+
+@media (min-width: 62rem) {
+  /* A touch squarer on the wide layout, so the plate lands level with the
+     field strip beside it instead of dragging the sheet long. */
+  .frame {
+    aspect-ratio: 9 / 10;
+  }
+}
