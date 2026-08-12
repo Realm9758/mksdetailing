@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-12T00:00:00Z",
+  "title": "Design System: MK'S DETAILING",
+  "extensions": {
+    "colorMeta": {
+      "fen": {
+        "role": "neutral",
+        "displayName": "Security Green",
+        "canonical": "#0a3a2b",
+        "tonalRamp": ["#041a13", "#062a1f", "#0a3a2b", "#125340", "#1d6d55", "#3f8e75", "#79b39f", "#bcd7ca"]
+      },
+      "fen-deep": {
+        "role": "neutral",
+        "displayName": "Field Deep",
+        "canonical": "#062a1f",
+        "tonalRamp": ["#03130e", "#051f17", "#062a1f", "#0a3d2d", "#12563f", "#307459", "#6ba086", "#b4d0c0"]
+      },
+      "fen-pale": {
+        "role": "neutral",
+        "displayName": "Field Pale",
+        "canonical": "#a9c4b4",
+        "tonalRamp": ["#1c2c24", "#2c4438", "#3f5d4d", "#547765", "#6b917e", "#87ab98", "#a9c4b4", "#d6e4dc"]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Security Paper",
+        "canonical": "#e8efe2",
+        "tonalRamp": ["#232a1f", "#3a442f", "#546043", "#71805c", "#93a17e", "#b5c2a5", "#d2dcc7", "#e8efe2"]
+      },
+      "paper-2": {
+        "role": "neutral",
+        "displayName": "Paper Inset",
+        "canonical": "#dde6d5",
+        "tonalRamp": ["#212819", "#363f28", "#4e5a3a", "#6b784f", "#8b9a6c", "#adba90", "#c9d5b9", "#dde6d5"]
+      },
+      "paper-3": {
+        "role": "neutral",
+        "displayName": "Blank-Field Paper",
+        "canonical": "#cfdbc6",
+        "tonalRamp": ["#1e2618", "#323d27", "#495836", "#647449", "#849263", "#a5b286", "#bfcdb1", "#cfdbc6"]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Hairline Rule",
+        "canonical": "#9fb494",
+        "tonalRamp": ["#1a2117", "#2b3625", "#3f4e35", "#576a48", "#72885e", "#8ba078", "#9fb494", "#c9d8c0"]
+      },
+      "rule-hard": {
+        "role": "neutral",
+        "displayName": "Heavy Rule",
+        "canonical": "#2c3a26",
+        "tonalRamp": ["#131a10", "#1f2a1a", "#2c3a26", "#3d5134", "#516b44", "#6d8a5f", "#96ae89", "#c6d6bd"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Document Ink",
+        "canonical": "#10160f",
+        "tonalRamp": ["#080b07", "#10160f", "#1c2519", "#2b3826", "#3e5036", "#57694b", "#7d8d71", "#b4c0aa"]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Secondary Ink",
+        "canonical": "#46523f",
+        "tonalRamp": ["#151a12", "#232b1e", "#33402c", "#46523f", "#5c6d52", "#7a8b6e", "#a2b096", "#cdd7c4"]
+      },
+      "stamp": {
+        "role": "primary",
+        "displayName": "Stamp Violet",
+        "canonical": "#57318f",
+        "tonalRamp": ["#1a0e2c", "#281545", "#3f2269", "#57318f", "#6e46ab", "#8a68c1", "#ad95d6", "#d7cbeb"]
+      },
+      "stamp-deep": {
+        "role": "primary",
+        "displayName": "Stamp Violet Deep",
+        "canonical": "#3f2269",
+        "tonalRamp": ["#140a22", "#1f1035", "#2e194e", "#3f2269", "#533088", "#6d4ba6", "#9781c8", "#cabfe4"]
+      },
+      "stamp-wash": {
+        "role": "primary",
+        "displayName": "Stamp Wash",
+        "canonical": "rgba(87, 49, 143, 0.12)",
+        "tonalRamp": ["rgba(87,49,143,0.04)", "rgba(87,49,143,0.08)", "rgba(87,49,143,0.12)", "rgba(87,49,143,0.18)", "rgba(87,49,143,0.26)", "rgba(87,49,143,0.4)", "rgba(87,49,143,0.6)", "rgba(87,49,143,0.85)"]
+      },
+      "disc": {
+        "role": "secondary",
+        "displayName": "Tax-Disc Red",
+        "canonical": "#b8342a",
+        "tonalRamp": ["#2c0c09", "#471310", "#671c17", "#8c261f", "#b8342a", "#d05a50", "#e0908a", "#f2cdc9"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The customer's own sentence on the certificate. One per page, capped at 15ch." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings on the green field, set in paper." },
+      "title": { "displayName": "Title", "purpose": "Business name in header, footer and document head; stamp and action lettering." },
+      "body": { "displayName": "Body", "purpose": "Running prose, capped at 66ch on paper and 42ch in section asides." },
+      "label": { "displayName": "Label", "purpose": "The name of a form box: uppercase, tracked, secondary ink on paper and field-pale on green." },
+      "value": { "displayName": "Value", "purpose": "What someone wrote in the box. Every sourced fact, with tabular numerals." }
+    },
+    "shadows": [
+      { "name": "sheet", "value": "0 1.5rem 3.5rem rgba(3, 20, 14, 0.42), 0 0.25rem 0.75rem rgba(3, 20, 14, 0.3)", "purpose": "A full sheet or a photograph laid on the green field." },
+      { "name": "lift", "value": "0 0.75rem 1.75rem rgba(3, 20, 14, 0.28)", "purpose": "A small paper object on the field: plate, slip, compare frame." },
+      { "name": "stamp-press", "value": "0 0.4rem 1rem rgba(63, 34, 105, 0.28)", "purpose": "Rest state of the primary action; the only violet shadow." },
+      { "name": "stamp-press-hover", "value": "0 0.7rem 1.5rem rgba(63, 34, 105, 0.34)", "purpose": "Primary action lifted on hover." },
+      { "name": "stamp-press-active", "value": "0 0.15rem 0.4rem rgba(63, 34, 105, 0.4)", "purpose": "Primary action pressed." },
+      { "name": "applied-stamp", "value": "0 0.4rem 0.9rem rgba(6, 20, 14, 0.16)", "purpose": "An applied stamp straddling a sheet edge." },
+      { "name": "disc", "value": "drop-shadow(0 0.55rem 1.1rem rgba(6, 20, 14, 0.3))", "purpose": "The perforated rating disc, so the punched edge casts through." }
+    ],
+    "motion": [
+      { "name": "ease-stamp", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Every transition on the page: entrance, hover, press." },
+      { "name": "stamp-in-opacity", "value": "opacity 0.42s var(--ease-stamp)", "purpose": "The entrance fade of a landing stamp." },
+      { "name": "stamp-in-transform", "value": "transform 0.62s var(--ease-stamp)", "purpose": "The settle from scale(1.045) and 1 to 1.6 degrees off square." },
+      { "name": "stamp-in-filter", "value": "filter 0.42s var(--ease-stamp)", "purpose": "The 1.5px blur clearing as the stamp lands." },
+      { "name": "stamp-stagger", "value": "90ms - 110ms per sibling", "purpose": "Delay step between adjacent entrances." },
+      { "name": "state", "value": "0.16s - 0.18s var(--ease-stamp)", "purpose": "Hover and press transitions on actions and links." }
+    ],
+    "breakpoints": [
+      { "name": "field-strip", "value": "46rem" },
+      { "name": "entries", "value": "52rem" },
+      { "name": "backpage", "value": "58rem" },
+      { "name": "certificate", "value": "62rem" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Action",
+      "kind": "button",
+      "refersTo": "action",
+      "description": "The stamp that ends a document: the WhatsApp action, pressed rather than drawn.",
+      "html": "<a class=\"ds-action\" href=\"#\"><svg width=\"21\" height=\"21\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"M12.04 2.5a9.4 9.4 0 0 0-8.1 14.14L2.5 21.5l4.98-1.4A9.4 9.4 0 1 0 12.04 2.5Zm0 1.72a7.68 7.68 0 1 1-3.9 14.3l-.28-.17-2.95.83.84-2.88-.18-.29a7.68 7.68 0 0 1 6.47-11.8Zm-3.5 3.6c-.18 0-.47.07-.71.34-.25.27-.94.92-.94 2.24 0 1.32.96 2.6 1.1 2.78.13.18 1.86 2.96 4.6 4.03 2.27.9 2.73.72 3.23.67.5-.04 1.6-.65 1.83-1.29.23-.63.23-1.18.16-1.29-.07-.11-.25-.18-.53-.31-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.6.13-.19.28-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.18-1.34-.8-.72-1.35-1.6-1.5-1.87-.16-.27-.02-.42.12-.55.12-.12.27-.32.4-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.13-.6-1.46-.83-2-.22-.53-.44-.46-.6-.46l-.5-.02Z\"/></svg>MESSAGE ON WHATSAPP</a>",
+      "css": ".ds-action { display: inline-flex; align-items: center; gap: 0.7rem; padding: 0.95rem 1.5rem; border: 2px solid #57318f; border-radius: 2px; background: #57318f; color: #e8efe2; font-family: var(--font-display), Anton, sans-serif; font-size: 1.15rem; letter-spacing: 0.075em; text-transform: uppercase; line-height: 1; text-decoration: none; box-shadow: 0 0.4rem 1rem rgba(63,34,105,0.28); transition: transform 0.18s cubic-bezier(0.16,1,0.3,1), box-shadow 0.18s cubic-bezier(0.16,1,0.3,1), background-color 0.18s cubic-bezier(0.16,1,0.3,1); } .ds-action svg { flex: none; } .ds-action:hover { background: #3f2269; transform: translateY(-1px) rotate(-0.8deg); box-shadow: 0 0.7rem 1.5rem rgba(63,34,105,0.34); } .ds-action:focus-visible { outline: 2px solid #57318f; outline-offset: 3px; } .ds-action:active { transform: translateY(1px) rotate(0deg); box-shadow: 0 0.15rem 0.4rem rgba(63,34,105,0.4); }"
+    },
+    {
+      "name": "Quiet Action",
+      "kind": "button",
+      "refersTo": "action-quiet",
+      "description": "A secondary contact link on paper: ink text on a hairline underline that turns violet on hover.",
+      "html": "<a class=\"ds-action-quiet\" href=\"#\"><svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5.5 3.5h3l1.5 3.75-2 1.25a11.5 11.5 0 0 0 5.5 5.5l1.25-2L18.5 13.5v3a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 3.5 5.7a2 2 0 0 1 2-2.2Z\"/></svg>07477 206575</a>",
+      "css": ".ds-action-quiet { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.55rem 0; color: #10160f; font-family: var(--font-body), 'Fira Sans', sans-serif; font-size: 0.92rem; font-weight: 500; text-decoration: none; border-bottom: 1px solid #9fb494; transition: color 0.16s cubic-bezier(0.16,1,0.3,1), border-color 0.16s cubic-bezier(0.16,1,0.3,1); } .ds-action-quiet:hover { color: #57318f; border-bottom-color: #57318f; } .ds-action-quiet:focus-visible { outline: 2px solid #57318f; outline-offset: 3px; }"
+    },
+    {
+      "name": "Applied Stamp",
+      "kind": "chip",
+      "refersTo": "stamp",
+      "description": "A rubber stamp pressed onto the sheet: outlined violet, washed, rotated off square.",
+      "html": "<div class=\"ds-stamp\">ISSUING STATION</div>",
+      "css": ".ds-stamp { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.5rem 0.95rem; border: 2px solid #57318f; border-radius: 2px; color: #57318f; background: rgba(87,49,143,0.12); font-family: var(--font-display), Anton, sans-serif; font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1; transform: rotate(-2.4deg); }"
+    },
+    {
+      "name": "Field Row",
+      "kind": "input",
+      "refersTo": "sheet",
+      "description": "A filled form row: tracked uppercase label beside a Courier Prime value, hairline-ruled.",
+      "html": "<dl class=\"ds-fields\"><div class=\"ds-field\"><dt class=\"ds-label\">Vehicle</dt><dd class=\"ds-value\">Audi S3 &middot; S30 ERH</dd></div><div class=\"ds-field\"><dt class=\"ds-label\">Posted</dt><dd class=\"ds-value\">25 July 2026</dd></div></dl>",
+      "css": ".ds-fields { display: grid; margin: 0; background: #e8efe2; padding: 0 1rem; } .ds-fields dt, .ds-fields dd { margin: 0; } .ds-field { display: grid; grid-template-columns: minmax(7.5rem, 10rem) 1fr; align-items: baseline; gap: 0 1rem; padding: 0.62rem 0; border-bottom: 1px solid #9fb494; } .ds-field:first-child { border-top: 1px solid #9fb494; } .ds-label { font-family: var(--font-body), 'Fira Sans', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #46523f; line-height: 1.3; } .ds-value { font-family: var(--font-data), 'Courier Prime', monospace; font-size: 0.94rem; letter-spacing: 0.005em; color: #10160f; font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Blank Field",
+      "kind": "input",
+      "refersTo": "field-blank",
+      "description": "How a fact nobody supplied is printed: a ruled, tinted slot with a writing line, never a guess.",
+      "html": "<dl class=\"ds-blank-wrap\"><div class=\"ds-blank-row\"><dt class=\"ds-label\">Price list</dt><dd class=\"ds-blank\">None published. Every car is quoted on the car.</dd></div></dl>",
+      "css": ".ds-blank-wrap { display: grid; margin: 0; background: #e8efe2; padding: 1rem; } .ds-blank-wrap dt, .ds-blank-wrap dd { margin: 0; } .ds-blank-row { display: grid; grid-template-columns: minmax(7.5rem, 10rem) 1fr; align-items: baseline; gap: 0 1rem; padding: 0.62rem 0; border-bottom: 1px solid #9fb494; } .ds-label { font-family: var(--font-body), 'Fira Sans', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #46523f; line-height: 1.3; } .ds-blank { display: block; background: #cfdbc6; border-top: 1px solid #9fb494; border-bottom: 1px solid #9fb494; padding: 0.5rem 0.7rem; color: #46523f; font-family: var(--font-body), 'Fira Sans', sans-serif; font-size: 0.82rem; line-height: 1.45; } .ds-blank::before { content: ''; display: block; margin-bottom: 0.5rem; border-top: 1px solid #9fb494; }"
+    },
+    {
+      "name": "Running Header",
+      "kind": "nav",
+      "refersTo": "runhead-action",
+      "description": "The header a multi-page document repeats on every sheet: mark, name, locality, one outlined action.",
+      "html": "<header class=\"ds-runhead\"><a class=\"ds-runhead-id\" href=\"#\"><svg width=\"34\" height=\"34\" viewBox=\"0 0 120 120\" aria-hidden=\"true\"><circle cx=\"60\" cy=\"60\" r=\"60\" fill=\"#0c0f0b\"/><g fill=\"#f4f7f1\"><path d=\"M35 45c3-16 47-16 50 0-6-2-13-3-25-3s-19 1-25 3Z\"/><path d=\"M19 50h82c2 0 3 1 3 3v10c0 3-2 5-5 5H21c-3 0-5-2-5-5V53c0-2 1-3 3-3Z\"/><path d=\"M13 73h94c2 0 3 1 3 3v3c0 2-1 3-3 3H13c-2 0-3-1-3-3v-3c0-2 1-3 3-3Z\"/></g></svg><span><span class=\"ds-runhead-name\">MK'S DETAILING</span><span class=\"ds-runhead-place\">Peterborough</span></span></a><a class=\"ds-runhead-action\" href=\"#\">WhatsApp</a></header>",
+      "css": ".ds-runhead { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.6rem 1.5rem; background: #062a1f; border-bottom: 1px solid rgba(169,196,180,0.22); } .ds-runhead-id { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; color: #e8efe2; } .ds-runhead-name { display: block; font-family: var(--font-display), Anton, sans-serif; font-size: 0.95rem; letter-spacing: 0.05em; line-height: 1.1; } .ds-runhead-place { display: block; font-family: var(--font-body), 'Fira Sans', sans-serif; font-size: 0.63rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #a9c4b4; } .ds-runhead-action { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.9rem; border: 1.5px solid #e8efe2; border-radius: 2px; color: #e8efe2; font-family: var(--font-display), Anton, sans-serif; font-size: 0.82rem; letter-spacing: 0.09em; text-transform: uppercase; line-height: 1; text-decoration: none; transition: background-color 0.16s cubic-bezier(0.16,1,0.3,1), color 0.16s cubic-bezier(0.16,1,0.3,1); } .ds-runhead-action:hover { background: #e8efe2; color: #062a1f; } .ds-runhead-action:focus-visible { outline: 2px solid #e8efe2; outline-offset: 3px; }"
+    },
+    {
+      "name": "Endorsement Slip",
+      "kind": "card",
+      "refersTo": "slip",
+      "description": "A review as a receipt-book slip: perforated stub rule, red star row, violet attribution.",
+      "html": "<blockquote class=\"ds-slip\"><div class=\"ds-slip-stars\" aria-label=\"Five stars\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"m12 3.4 2.55 5.5 5.95.72-4.4 4.1 1.17 5.88L12 16.72 6.73 19.6l1.17-5.88-4.4-4.1 5.95-.72L12 3.4Z\"/></svg><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"m12 3.4 2.55 5.5 5.95.72-4.4 4.1 1.17 5.88L12 16.72 6.73 19.6l1.17-5.88-4.4-4.1 5.95-.72L12 3.4Z\"/></svg><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"m12 3.4 2.55 5.5 5.95.72-4.4 4.1 1.17 5.88L12 16.72 6.73 19.6l1.17-5.88-4.4-4.1 5.95-.72L12 3.4Z\"/></svg><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"m12 3.4 2.55 5.5 5.95.72-4.4 4.1 1.17 5.88L12 16.72 6.73 19.6l1.17-5.88-4.4-4.1 5.95-.72L12 3.4Z\"/></svg><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"m12 3.4 2.55 5.5 5.95.72-4.4 4.1 1.17 5.88L12 16.72 6.73 19.6l1.17-5.88-4.4-4.1 5.95-.72L12 3.4Z\"/></svg></div><p class=\"ds-slip-body\">Amazing service, amazing outcome, got given back a brand new car</p><footer class=\"ds-slip-by\"><cite>Victor Ezeugo</cite></footer></blockquote>",
+      "css": ".ds-slip { margin: 0; background: #e8efe2; color: #10160f; padding: 1.4rem 1.5rem 1.25rem; box-shadow: 0 0.75rem 1.75rem rgba(3,20,14,0.28); border-radius: 2px; position: relative; display: grid; gap: 0.85rem; align-content: start; transform: rotate(-1.2deg); max-width: 22rem; } .ds-slip::before { content: ''; position: absolute; top: 0.65rem; bottom: 0.65rem; left: 0.85rem; border-left: 1px dashed #cfdbc6; } .ds-slip-stars { display: flex; gap: 0.15rem; color: #b8342a; } .ds-slip-body { margin: 0; font-family: var(--font-body), 'Fira Sans', sans-serif; font-size: 1.02rem; line-height: 1.5; color: #10160f; } .ds-slip-by { padding-top: 0.35rem; border-top: 1px solid #9fb494; } .ds-slip-by cite { font-style: normal; font-family: var(--font-body), 'Fira Sans', sans-serif; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: #57318f; }"
+    },
+    {
+      "name": "Register Band",
+      "kind": "nav",
+      "refersTo": "sheet",
+      "description": "The ruled ledger head above a field section, tying it back to the document by reference number.",
+      "html": "<div class=\"ds-register-band\"><span>Register of published work</span><span>MKS / PE1 / 001</span></div>",
+      "css": ".ds-register-band { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.35rem 1.5rem; padding: 0.55rem 0 0.5rem; border-top: 2px solid rgba(232,239,226,0.55); border-bottom: 1px solid rgba(232,239,226,0.3); font-family: var(--font-body), 'Fira Sans', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #e8efe2; } .ds-register-band > :last-child { font-family: var(--font-data), 'Courier Prime', monospace; letter-spacing: 0.08em; text-transform: none; }"
+    },
+    {
+      "name": "Rating Disc",
+      "kind": "custom",
+      "refersTo": "disc",
+      "description": "The rating as a British tax disc, perforated by an SVG mask so the bites show what it lies on. The only place red is spent at size.",
+      "html": "<svg width=\"166\" height=\"166\" viewBox=\"0 0 200 200\" role=\"img\" aria-label=\"5.0 out of 5 from 42 Google reviews\" style=\"filter: drop-shadow(0 0.55rem 1.1rem rgba(6,20,14,0.3)); rotate: -7deg;\"><mask id=\"ds-perf\"><rect width=\"200\" height=\"200\" fill=\"black\"/><circle cx=\"100\" cy=\"100\" r=\"96\" fill=\"white\"/><circle cx=\"196\" cy=\"100\" r=\"4.6\" fill=\"black\"/><circle cx=\"189.1\" cy=\"113.1\" r=\"4.6\" fill=\"black\"/><circle cx=\"177.9\" cy=\"122.7\" r=\"4.6\" fill=\"black\"/><circle cx=\"163.8\" cy=\"127.5\" r=\"4.6\" fill=\"black\"/><circle cx=\"148.9\" cy=\"126.9\" r=\"4.6\" fill=\"black\"/><circle cx=\"135.3\" cy=\"121\" r=\"4.6\" fill=\"black\"/><circle cx=\"124.6\" cy=\"110.7\" r=\"4.6\" fill=\"black\"/><circle cx=\"118.1\" cy=\"97.4\" r=\"4.6\" fill=\"black\"/><circle cx=\"116.9\" cy=\"82.6\" r=\"4.6\" fill=\"black\"/><circle cx=\"121.2\" cy=\"68.3\" r=\"4.6\" fill=\"black\"/><circle cx=\"130.5\" cy=\"56.8\" r=\"4.6\" fill=\"black\"/><circle cx=\"143.4\" cy=\"49.4\" r=\"4.6\" fill=\"black\"/><circle cx=\"158.2\" cy=\"47.2\" r=\"4.6\" fill=\"black\"/><circle cx=\"172.6\" cy=\"50.4\" r=\"4.6\" fill=\"black\"/><circle cx=\"184.6\" cy=\"58.7\" r=\"4.6\" fill=\"black\"/><circle cx=\"192.8\" cy=\"70.9\" r=\"4.6\" fill=\"black\"/><circle cx=\"192.8\" cy=\"129.1\" r=\"4.6\" fill=\"black\"/><circle cx=\"184.6\" cy=\"141.3\" r=\"4.6\" fill=\"black\"/><circle cx=\"172.6\" cy=\"149.6\" r=\"4.6\" fill=\"black\"/><circle cx=\"158.2\" cy=\"152.8\" r=\"4.6\" fill=\"black\"/><circle cx=\"143.4\" cy=\"150.6\" r=\"4.6\" fill=\"black\"/><circle cx=\"130.5\" cy=\"143.2\" r=\"4.6\" fill=\"black\"/><circle cx=\"121.2\" cy=\"131.7\" r=\"4.6\" fill=\"black\"/><circle cx=\"100\" cy=\"196\" r=\"4.6\" fill=\"black\"/><circle cx=\"86.9\" cy=\"189.1\" r=\"4.6\" fill=\"black\"/><circle cx=\"77.3\" cy=\"177.9\" r=\"4.6\" fill=\"black\"/><circle cx=\"72.5\" cy=\"163.8\" r=\"4.6\" fill=\"black\"/><circle cx=\"73.1\" cy=\"148.9\" r=\"4.6\" fill=\"black\"/><circle cx=\"79\" cy=\"135.3\" r=\"4.6\" fill=\"black\"/><circle cx=\"89.3\" cy=\"124.6\" r=\"4.6\" fill=\"black\"/><circle cx=\"102.6\" cy=\"118.1\" r=\"4.6\" fill=\"black\"/><circle cx=\"4\" cy=\"100\" r=\"4.6\" fill=\"black\"/><circle cx=\"10.9\" cy=\"86.9\" r=\"4.6\" fill=\"black\"/><circle cx=\"22.1\" cy=\"77.3\" r=\"4.6\" fill=\"black\"/><circle cx=\"36.2\" cy=\"72.5\" r=\"4.6\" fill=\"black\"/><circle cx=\"51.1\" cy=\"73.1\" r=\"4.6\" fill=\"black\"/><circle cx=\"64.7\" cy=\"79\" r=\"4.6\" fill=\"black\"/><circle cx=\"75.4\" cy=\"89.3\" r=\"4.6\" fill=\"black\"/><circle cx=\"81.9\" cy=\"102.6\" r=\"4.6\" fill=\"black\"/><circle cx=\"83.1\" cy=\"117.4\" r=\"4.6\" fill=\"black\"/><circle cx=\"78.8\" cy=\"131.7\" r=\"4.6\" fill=\"black\"/><circle cx=\"7.2\" cy=\"129.1\" r=\"4.6\" fill=\"black\"/><circle cx=\"15.4\" cy=\"141.3\" r=\"4.6\" fill=\"black\"/><circle cx=\"27.4\" cy=\"149.6\" r=\"4.6\" fill=\"black\"/><circle cx=\"41.8\" cy=\"152.8\" r=\"4.6\" fill=\"black\"/><circle cx=\"56.6\" cy=\"150.6\" r=\"4.6\" fill=\"black\"/></mask><g mask=\"url(#ds-perf)\"><circle cx=\"100\" cy=\"100\" r=\"96\" fill=\"#e8efe2\"/><circle cx=\"100\" cy=\"100\" r=\"96\" fill=\"none\" stroke=\"#b8342a\" stroke-width=\"13\"/></g><circle cx=\"100\" cy=\"100\" r=\"80\" fill=\"none\" stroke=\"#b8342a\" stroke-width=\"1.5\"/><circle cx=\"100\" cy=\"100\" r=\"75\" fill=\"none\" stroke=\"#b8342a\" stroke-width=\"0.75\" stroke-opacity=\"0.5\"/><text x=\"100\" y=\"62\" text-anchor=\"middle\" fill=\"#46523f\" font-family=\"var(--font-body), sans-serif\" font-size=\"12\" font-weight=\"600\" letter-spacing=\"2.4\">GOOGLE</text><text x=\"100\" y=\"118\" text-anchor=\"middle\" fill=\"#b8342a\" font-family=\"var(--font-display), Anton, sans-serif\" font-size=\"58\" letter-spacing=\"-1\">5.0</text><g fill=\"#b8342a\" transform=\"translate(100 133)\"><path transform=\"translate(-32 0) scale(0.55)\" d=\"M0-11 3.4-3.7 11.4-2.8 5.5 2.6 7.1 10.5 0 6.6-7.1 10.5-5.5 2.6-11.4-2.8-3.4-3.7Z\"/><path transform=\"translate(-16 0) scale(0.55)\" d=\"M0-11 3.4-3.7 11.4-2.8 5.5 2.6 7.1 10.5 0 6.6-7.1 10.5-5.5 2.6-11.4-2.8-3.4-3.7Z\"/><path transform=\"translate(0 0) scale(0.55)\" d=\"M0-11 3.4-3.7 11.4-2.8 5.5 2.6 7.1 10.5 0 6.6-7.1 10.5-5.5 2.6-11.4-2.8-3.4-3.7Z\"/><path transform=\"translate(16 0) scale(0.55)\" d=\"M0-11 3.4-3.7 11.4-2.8 5.5 2.6 7.1 10.5 0 6.6-7.1 10.5-5.5 2.6-11.4-2.8-3.4-3.7Z\"/><path transform=\"translate(32 0) scale(0.55)\" d=\"M0-11 3.4-3.7 11.4-2.8 5.5 2.6 7.1 10.5 0 6.6-7.1 10.5-5.5 2.6-11.4-2.8-3.4-3.7Z\"/></g><text x=\"100\" y=\"160\" text-anchor=\"middle\" fill=\"#10160f\" font-family=\"var(--font-body), sans-serif\" font-size=\"12.5\" font-weight=\"600\" letter-spacing=\"1.6\">42 REVIEWS</text></svg>",
+      "css": ""
+    }
+  ],
+  "narrative": {
+    "northStar": "The Service Record",
+    "overview": "The whole site is one vehicle document. Security-paper sheets, green-cast rather than cream, lie on an engine-turned security-green field; each sheet is ruled with hairlines and closed with a double rule; every fact on it is set as a form field with a Fira Sans label above a Courier Prime value. Actions are not buttons in the software sense, they are rubber stamps pressed onto the paper in violet ink. One number on the page is treated as evidence rather than as copy, and it gets a perforated tax disc punched over the sheet's corner.\n\nThe density is a form's density: tight rows, hairline separators, no decorative whitespace between related facts, generous air only between sections. The paper is the light surface and the field is the dark one, so every surface change is also an ink change. Two utility classes, .on-paper and .on-field, carry that switch, and any surface that contradicts its context has to reset its own ink.\n\nConfirmed rejections, inherited from the direction contract and honoured in the build: no near-black hero with an orange glow, no wet supercar beauty shot, no Bronze/Silver/Gold tier cards. The photography is the business's own posted work, printed flat inside register-marked frames rather than lit like an advert.",
+    "keyCharacteristics": [
+      "Security-green ground, green-cast paper; no cream, no grey, no pure black",
+      "Every fact is a definition list: label above value, hairline below",
+      "Violet is the only action colour; red is only ever evidence",
+      "2px trim radius everywhere, because a certificate is trimmed, not rounded",
+      "A fact nobody supplied prints as a ruled blank box, never as a plausible guess",
+      "One authored motion on the page: a stamp landing"
+    ],
+    "rules": [
+      { "name": "The One Red Rule", "body": "Red is evidence, never emphasis. It appears only where the Google rating is being printed: the tax disc and the star rows that repeat it. If a new surface wants red for a heading, a price, a badge or an alert, the answer is stamp violet or ink.", "section": "colors" },
+      { "name": "The Stamp-Only Action Rule", "body": "Violet marks actions and applied marks. If an element is not something a person can press, or something that was pressed onto the document, it does not get violet.", "section": "colors" },
+      { "name": "The Green-Cast Rule", "body": "Paper here is green-cast, never cream, and pale text on the field is tinted from the ground rather than desaturated to grey. Introducing a neutral warm white or a true grey breaks the security-paper stock.", "section": "colors" },
+      { "name": "The Context Ink Rule", "body": "A paper surface sitting inside an .on-field section must reset its own label ink to the secondary ink. Inherited pale ink lands at 1.9:1 on paper.", "section": "colors" },
+      { "name": "The Label-Above-Value Rule", "body": "A fact is a dt label in Fira Sans small caps over a dd value in Courier Prime. Facts are never set as sentences with bold lead-ins, and never as body text with a colon.", "section": "typography" },
+      { "name": "The Three-Voice Rule", "body": "Anton stamps, Fira Sans labels and prose, Courier Prime values. A fourth family, a second display weight, or Anton used for body copy all break the document.", "section": "typography" },
+      { "name": "The Reset Rule", "body": "dl, dt, dd { margin: 0 } is load-bearing, not housekeeping. Every field on the page is a definition list, and the browser's 40px dd indent would break every field row on the site.", "section": "typography" },
+      { "name": "The Paper-on-Field Rule", "body": "Shadows are cast onto the green only. A component sitting on paper gets a rule, a tone change, or an inset border instead.", "section": "elevation" },
+      { "name": "The One Entrance Rule", "body": "Motion is a stamp landing: from scale(1.045), 1 to 1.6 degrees off square and 1.5px out of focus, settling over 0.42s opacity and 0.62s transform on cubic-bezier(0.16, 1, 0.3, 1), staggered 90 to 110ms per sibling. The pre-state is set by script only, never rendered by the server, so the page reads with JavaScript off, and prefers-reduced-motion cancels it entirely.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do print every fact as a label-over-value definition list, Fira Sans 600 uppercase over Courier Prime.",
+      "Do use .field-blank when a fact has not been supplied. A ruled, tinted slot with a stated reason beats a plausible guess.",
+      "Do reset label ink to the secondary ink on any paper surface placed inside an .on-field section.",
+      "Do keep every corner at 2px and let hairline rules, not radius or fills, do the structural work.",
+      "Do let applied objects overhang: the disc off the sheet's corner, the stamp across the trim rule, the plate over the photograph.",
+      "Do cast shadows only from paper onto the green field.",
+      "Do set the entrance pre-state from script only, and cancel the entrance under prefers-reduced-motion.",
+      "Do draw new icons on the 24-unit grid at 1.75 stroke with round caps and joins."
+    ],
+    "donts": [
+      "Don't spend the tax-disc red on anything that is not the Google rating. Not on actions, alerts, prices, headings or hovers.",
+      "Don't give violet to anything that is not an action or an applied mark.",
+      "Don't substitute a cream paper or a neutral grey for the green-cast paper and field-tinted pale.",
+      "Don't introduce a fourth typeface, a second Anton weight, or Anton in running copy.",
+      "Don't add a radius scale, a pill, or a rounded card. The document is trimmed.",
+      "Don't add a second entrance animation, a parallax, or a hover lift on anything that is not the primary action.",
+      "Don't let a row-spanning grid item share surplus height across auto rows; size the final row 1fr so a form ends short instead of splitting open.",
+      "Don't invent a fact to fill a field, and don't remove a blank field to make a section look complete."
+    ]
+  }
+}

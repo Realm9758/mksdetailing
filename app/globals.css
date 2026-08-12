@@ -389,12 +389,6 @@ dd {
   transform: rotate(var(--stamp-rotate));
 }
 
-.stamp-heading {
-  --stamp-rotate: -1.6deg;
-  font-size: clamp(0.82rem, 2vw, 1rem);
-  padding: 0.45rem 0.9rem;
-}
-
 /* The primary action is the stamp that ends a document: pressed, not drawn. */
 .action {
   display: inline-flex;
